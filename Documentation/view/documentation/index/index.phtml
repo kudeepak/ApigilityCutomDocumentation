@@ -1,0 +1,61 @@
+<?php 
+//echo '<pre>'; print_r($this->menu); exit;
+?>
+<style>
+<!--
+.page-content {
+  	border : 1px solid #eee !important;
+}
+.tree-demo {
+	overflow:hidden;
+}
+-->
+</style>
+        <div class="page-sidebar-wrapper">
+        	<div class="page-sidebar navbar-collapse collapse">
+        	<div class="portlet">
+        		<h4>API & Methods</h4>
+        	</div>
+        	<div id="tree_1" class="tree-demo">
+                                    <ul>
+                                    <?php
+                                      foreach ($this->menu as $key => $values) {
+                                         $s = '<ul>';
+                                         foreach ($values['service']['services'] as $sk => $service) {
+                                            $s .= '<li title="'.$service['name'].'" api="' . $values['name'] . '" load="ajax" id="' . $service['name'] . '" service="' . $service['name'] . '">' . $service['name'] . '</li>';
+                                         }
+                                         $s .= "</ul>";
+                                         echo '<li title="'.$values['name'].'">' . $values['name'] . $s . '</li>';
+                                      }
+                                    ?>
+                                    </ul>
+                                    
+        					</div>
+        					</div>
+        </div>
+		<div class="page-content-wrapper">
+			<div class="page-content">
+					<div class="well">
+						<h4 class="text-info"><?php ?>Welcome to PlanningPro API.</h4>
+							 <p>The PlanningPro API follows the REST principles and has been built using apigility over HTTP using GET/POST/PUT/DELETE etc. 
+							 Every resource such as Post, Comment or Task has its own URL and can be manipulated separately.</p>
+
+							<p>You can even explore the view part of the API (everything that's fetched with GET) through a regular browser REST Client plugin.</p> 
+						
+					</div>
+					
+					<div id="documentation">
+						<div class="well">
+							<h4 class="text-info">Getting Started</h4>
+							<p>Get the API OauthToken.</p>
+							<p>Add OauthToken to HTTP Headers as<br> <h4>Authorization : Bearer <?php echo htmlentities('<OauthToken>');?></h4></h4></p>
+
+							<p>Follow the guidelines provided in this document.</p>
+						</div>
+						<div class="well">
+							<h4 class="text-info">Help & Support</h4>
+							<p>If you have any questions or would like to put any ideas forward, please visit our community help centre. We’d love to hear from you!.</p>
+						</div>
+				    </div>
+			</div>
+		</div>

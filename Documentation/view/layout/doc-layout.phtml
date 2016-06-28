@@ -1,0 +1,120 @@
+<?php echo $this->doctype(); ?>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<?php
+echo $this->headTitle('Apigility');
+echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0');
+echo $this->headLink(array(
+    'rel' => 'icon',
+    'type' => 'image/png',
+    'href' => $this->basePath('/img/favicon.png')
+)) 
+    ->prependStylesheet('http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all')
+    ->prependStylesheet($this->basePath('/assets/admin/layout/css/custom.css'))
+    ->prependStylesheet($this->basePath('/assets/admin/layout/css/themes/default.css'))
+    ->prependStylesheet($this->basePath('/assets/admin/layout/css/layout.css'))
+    ->prependStylesheet($this->basePath('/assets/global/css/plugins.css'))
+    ->prependStylesheet($this->basePath('/assets/global/css/components.css'))
+    ->prependStylesheet($this->basePath('/assets/global/plugins/jstree/dist/themes/default/style.min.css'))
+    ->prependStylesheet($this->basePath('/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css'))
+    ->prependStylesheet($this->basePath('/assets/global/plugins/uniform/css/uniform.default.css'))
+    ->prependStylesheet($this->basePath('/assets/global/plugins/simple-line-icons/simple-line-icons.min.css'))
+    ->prependStylesheet($this->basePath('/assets/global/plugins/font-awesome/css/font-awesome.min.css'))
+    ->prependStylesheet($this->basePath('/zf-apigility/css/main.min.css'))
+    ->prependStylesheet($this->basePath('/zf-apigility/css/bootstrap.min.css'));
+?>
+    </head>
+<body  class="page-header-fixed page-quick-sidebar-over-content ">
+	<!-- BEGIN HEADER -->
+<div class="page-header navbar navbar-fixed-top">
+	<!-- BEGIN HEADER INNER -->
+	<div class="page-header-inner">
+		<!-- BEGIN LOGO -->
+		<div class="page-logo">
+			<a href="javascript:void(0);">
+			<img src="/img/logod2.png" height="30px" alt="logo" class="logo-default"/>
+			</a>
+			<div class="menu-toggler sidebar-toggler hide">
+				<!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+			</div>
+		</div>
+		<!-- END LOGO -->
+		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+		<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+		</a>
+		<!-- END RESPONSIVE MENU TOGGLER -->
+		
+	</div>
+	<!-- END HEADER INNER -->
+</div>
+<!-- END HEADER -->
+<div class="clearfix">
+</div>
+	<div class="container">
+
+	<div class="page-container">
+				<?php echo $this->content; ?>
+    </div>
+
+    </div>
+	<footer>
+		<hr>
+		<div class="container center-block">
+			<div class="row">
+				<div class="col-sm-6">
+					<p class="pull-left">
+                    &copy; Copyright 2013 - <?php echo date('Y')?>
+                    by <a href="http://www.zend.com">PlanningPro</a>						
+					</p>
+				</div>
+				<div class="col-sm-6">					
+				</div>
+			</div>
+		</div>
+	</footer>
+        <?php
+        echo $this->headScript()
+        ->prependFile($this->basePath('/assets/admin/layout/scripts/quick-sidebar.js'))
+        ->prependFile($this->basePath('/assets/admin/layout/scripts/layout.js'))
+        ->prependFile($this->basePath('/assets/global/scripts/metronic.js'))
+        ->prependFile($this->basePath('/assets/admin/pages/scripts/ui-tree.js'))
+        ->prependFile($this->basePath('/assets/global/plugins/jstree/dist/jstree.min.js'))
+        ->prependFile($this->basePath('/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js'))
+        ->prependFile($this->basePath('/assets/global/plugins/uniform/jquery.uniform.min.js'))
+        ->prependFile($this->basePath('/assets/global/plugins/jquery.cokie.min.js'))
+        ->prependFile($this->basePath('/assets/global/plugins/jquery.blockui.min.js'))
+        ->prependFile($this->basePath('/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js'))
+        ->prependFile($this->basePath('/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js'))
+        ->prependFile($this->basePath('/assets/global/plugins/bootstrap/js/bootstrap.min.js'))
+        ->prependFile($this->basePath('/assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js'))
+        ->prependFile($this->basePath('/assets/global/plugins/jquery-migrate-1.2.1.min.js'))        
+        ->prependFile($this->basePath('/assets/global/plugins/jquery-1.11.0.min.js'))        
+        ?>
+<script>
+        jQuery(document).ready(function() {       
+           // initiate layout and plugins
+           Metronic.init(); // init metronic core components
+		   Layout.init(); // init current layout
+           QuickSidebar.init() // init quick sidebar
+           UITree.init();
+        });
+</script>
+<script type="text/javascript">
+$(function() {
+    $('li[load="ajax"]').live('click',function(e) {
+        var s = jQuery(this).attr('service');
+        var a = jQuery(this).attr('api');
+    	$.ajax({
+  		  url : '/documentation/index/docs?service=' + s + '&api=' + a,
+    	  success :function(x) {
+              $('#documentation').html(x);
+          }
+        });
+    });
+});
+</script>
+        
+    </body>
+    
+</html>

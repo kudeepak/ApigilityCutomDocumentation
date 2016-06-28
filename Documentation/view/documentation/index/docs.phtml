@@ -1,0 +1,115 @@
+	<?php 
+	//echo '<pre>'; print_r($config); exit;
+	$api_path = $hosturl.'/'.str_ireplace('_', '-', $config['collection_name']);
+	?>
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row">
+    	<div class="col-md-12">
+    		<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+    		<h3 class="page-title">
+    		<?php echo $api;?> : <span class="text-info"><?php echo $service;?></span>
+    		</h3>
+            <!-- END PAGE TITLE & BREADCRUMB-->
+    	</div>
+    </div>
+    <!-- END PAGE HEADER-->
+    <div class="row">
+    	<div class="col-md-12">
+    	<div class="portlet-body">
+    		<div class="well">
+    		<h4 class="text-info">Description :</h4>
+    		<?php if($doc['description']!='') {
+    		    
+    		    $doc['description'] = explode('**', $doc['description']);
+    		    foreach($doc['description'] as $desc) {
+    		        echo '<p>'.htmlentities($desc).'</p>';
+    		    }
+    		} else {
+    		    echo 'No description added.';
+    		}
+    		?>
+    		</div>
+            <!-- START GET METHOD -->
+            <?php if(in_array('GET', $config['collection_http_methods']) && $doc['collection']['GET']['response']!='') { ?>
+            <div class="portlet box blue-hoki">
+            	<div class="portlet-title">
+            		<div class="caption">
+            			METHOD : GET
+            		</div>
+            		<div class="tools">
+            			<a href="javascript:;" class="expand">
+            			</a>
+            		</div>
+            	</div>
+            	<div class="portlet-body display-hide">
+            	Request -<pre><code><?php echo ($doc['collection']['GET']['description']!='') ? $api_path.'/'.htmlentities($doc['collection']['GET']['description']) : $api_path; ?></code></pre> 	    	 
+            	Response -<pre><code><?php echo ($doc['collection']['GET']['response']!='') ? $doc['collection']['GET']['response'] : 'No response added.'; ?></code></pre> 	
+            	<?php //echo '<pre>'; print_r($doc); echo '</pre>'?>
+            	</div>
+            </div>
+            <?php } ?>
+            <!-- END GET METHOD -->
+            <!-- START POST METHOD -->
+            <?php if(in_array('POST', $config['collection_http_methods'])) { ?>
+            <div class="portlet box blue-hoki">
+            	<div class="portlet-title">
+            		<div class="caption">
+            			METHOD : POST
+            		</div>
+            		<div class="tools">
+            			<a href="javascript:;" class="expand">
+            			</a>
+            		</div>
+            	</div>
+            	<div class="portlet-body display-hide">
+            	 <?php if($doc['collection']['POST']['description']!='') {
+				    $doc['collection']['POST']['description'] = explode('**', $doc['collection']['POST']['description']);
+    		    	foreach($doc['collection']['POST']['description'] as $desc) {
+    		        	echo '<p>'.htmlentities($desc).'</p>';
+    		    	}
+    		     } else {
+    		         echo 'No description added.';
+    		     }
+    		     ?>
+            	 <h5 class="text-info bold">API URL : <?php echo $api_path;?></h5>
+        		 Request -<pre><code><?php echo ($doc['collection']['POST']['request']!='') ? $doc['collection']['POST']['request'] : 'No request parameters added.'; ?></code></pre> 	    	 
+            	 Response -<pre><code><?php echo ($doc['collection']['POST']['response']!='') ? $doc['collection']['POST']['response'] : 'No response added.'; ?></code></pre> 	
+            	 <?php //echo '<pre>'; print_r($doc); echo '</pre>'?>
+            	 </div>
+            </div>
+            <?php } ?>
+            <!-- END POST METHOD -->
+            <!-- START PATCH METHOD -->
+            <?php if(in_array('PATCH', $config['entity_http_methods'])) { ?>
+            <div class="portlet box blue-hoki">
+            	<div class="portlet-title">
+            		<div class="caption">
+            			METHOD : PATCH
+            		</div>
+            		<div class="tools">
+            			<a href="javascript:;" class="expand">
+            			</a>
+            		</div>
+            	</div>
+            	<div class="portlet-body display-hide">
+            	 <?php if($doc['entity']['PATCH']['description']!='') {
+				    $doc['entity']['PATCH']['description'] = explode('**', $doc['entity']['PATCH']['description']);
+    		    	foreach($doc['entity']['PATCH']['description'] as $desc) {
+    		        	echo '<p>'.htmlentities($desc).'</p>';
+    		    	}
+    		     } else {
+    		         echo 'No description added.';
+    		     }
+    		     ?>
+            	 <h5 class="text-info bold">API URL : <?php echo $api_path.'/'.htmlentities('<Id>');?></h5>
+        		 Request -<pre><code><?php echo ($doc['entity']['PATCH']['request']!='') ? $doc['entity']['PATCH']['request'] : 'No request parameters added.'; ?></code></pre> 	    	 
+            	 Response -<pre><code><?php echo ($doc['entity']['PATCH']['response']!='') ? $doc['entity']['PATCH']['response'] : 'No response added.'; ?></code></pre> 	
+            	 <?php //echo '<pre>'; print_r($doc); echo '</pre>'?>
+            	 </div>
+            </div>
+            <?php } ?>
+            <!-- END PATCH METHOD -->
+            
+    	</div>
+    	</div>
+    </div>
